@@ -22,9 +22,7 @@ public class CardFileHandler {
                     int endIndex = Math.min(29, line.length());
                     String cardNumber = line.substring(7, endIndex).trim();
 
-                    if (!cardNumber.isEmpty()) {
-                        cardNumbers.add(cardNumber);
-                    }
+                    if (!cardNumber.isEmpty()) cardNumbers.add(cardNumber);
                 }
             }
         }

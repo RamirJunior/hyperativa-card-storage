@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/hyperativa/cards")
@@ -40,7 +39,6 @@ public class CardController {
     public ResponseEntity<?> findCard(@PathVariable String cardNumber) {
         var card = cardService.findCardByNumber(cardNumber);
         if (card.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
         return ResponseEntity.status(HttpStatus.OK).body(new CardResponse(card.get().getId(), true));
     }
 }

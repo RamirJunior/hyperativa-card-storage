@@ -19,8 +19,7 @@ public class UserService {
 
     public RegisterResponse register(RegisterRequest registerRequest) {
         var existingUser = userRepository.findByEmail(registerRequest.getEmail());
-        if (existingUser != null)
-            throw new RuntimeException("Email already registered.");
+        if (existingUser != null) throw new RuntimeException("Email already registered.");
 
         registerRequest.setPassword(encrypt(registerRequest.getPassword()));
         var user = new User(registerRequest.getEmail(), registerRequest.getPassword());

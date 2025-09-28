@@ -19,7 +19,9 @@ public class CardService {
     private final CardFileHandler cardFileHandler;
     private final CardHashHandler cardHashHandler;
 
-    public CardService(CardRepository cardRepository, CardFileHandler cardFileHandler, CardHashHandler cardHashHandler) {
+    public CardService(CardRepository cardRepository,
+                       CardFileHandler cardFileHandler,
+                       CardHashHandler cardHashHandler) {
         this.cardRepository = cardRepository;
         this.cardFileHandler = cardFileHandler;
         this.cardHashHandler = cardHashHandler;
@@ -44,20 +46,15 @@ public class CardService {
             String hash = cardHashHandler.hashCardNumber(cardNumber.trim());
             Card card = new Card(null, hash);
             batch.add(card);
-
             if (batch.size() >= batchSize) {
-                savedCards.addAll(cardRepository.saveAll(batch)); // salva em lote
+                savedCards.addAll(cardRepository.saveAll(batch));
                 batch.clear();
             }
         }
 
-        if (!batch.isEmpty()) {
-            savedCards.addAll(cardRepository.saveAll(batch));
-        }
-
+        if (!batch.isEmpty()) savedCards.addAll(cardRepository.saveAll(batch));
         return savedCards;
     }
-
 
     public Optional<Card> findCardByNumber(String cardNumber) {
         String hash = cardHashHandler.hashCardNumber(cardNumber);
